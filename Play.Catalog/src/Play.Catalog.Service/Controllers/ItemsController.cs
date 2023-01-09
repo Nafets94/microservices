@@ -29,7 +29,7 @@ namespace Play.Catalog.Service.Controllers
         [HttpGet("{id}")]
         public ActionResult<ItemDto> GetById(Guid id)
         {
-            var item = items.Where(item => item.id == id).SingleOrDefault();
+            var item = items.Where(item => item.Id == id).SingleOrDefault();
 
             if (item == null) return NotFound();
 
@@ -45,14 +45,14 @@ namespace Play.Catalog.Service.Controllers
 
             items.Add(item);
 
-            return CreatedAtAction(nameof(GetById), new {id = item.id}, item);
+            return CreatedAtAction(nameof(GetById), new {id = item.Id}, item);
         }
 
         // PUT /items/{id}
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody] UpdateItemDto updateItemDto)
         {
-            var existingItem = items.Where(item => item.id == id).SingleOrDefault();
+            var existingItem = items.Where(item => item.Id == id).SingleOrDefault();
 
             if (existingItem == null) return NotFound();
 
@@ -63,7 +63,7 @@ namespace Play.Catalog.Service.Controllers
                 Price = updateItemDto.Price
             };
 
-            var index = items.FindIndex(existingItem => existingItem.id == id);
+            var index = items.FindIndex(existingItem => existingItem.Id == id);
             items[index] = updatedItem;
 
             return NoContent();
@@ -73,7 +73,7 @@ namespace Play.Catalog.Service.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            var existingItem = items.Where(items=> items.id == id).SingleOrDefault();
+            var existingItem = items.Where(items=> items.Id == id).SingleOrDefault();
 
             if (existingItem == null) return NotFound();
 
