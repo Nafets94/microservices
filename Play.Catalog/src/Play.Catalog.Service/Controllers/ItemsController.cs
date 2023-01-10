@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Play.Catalog.Service.Dtos;
 using Play.Catalog.Service.Entities;
-using Play.Catalog.Service.Repositories;
+using Play.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +46,6 @@ namespace Play.Catalog.Service.Controllers
         {
             var item = new Item
             {
-                //Id = Guid.NewGuid(),
                 Name = createItemDto.Name,
                 Description = createItemDto.Description,
                 Price = createItemDto.Price,
