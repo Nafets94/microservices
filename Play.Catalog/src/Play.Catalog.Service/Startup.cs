@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,13 @@ namespace Play.Catalog.Service
 
             services.AddMassTransitWithRabbitMq();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "https://localhost:5003";
+                    options.Audience = serviceSettings.ServiceName;
+                });
+
             services.AddControllers(options =>
             {
                 options.SuppressAsyncSuffixInActionNames = false;
@@ -65,6 +73,8 @@ namespace Play.Catalog.Service
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
