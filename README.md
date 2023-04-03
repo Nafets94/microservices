@@ -1,3 +1,3 @@
 # microservices
 
-Practicing microservices architecture
+Practicing microservices architecture by implementing a game's inventory system.
